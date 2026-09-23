@@ -276,16 +276,28 @@ Beyond §6, non-negotiable before you call it done:
 
 - Repo is public and served from the **root of the default branch** (`/` not `/docs`).
 - `.nojekyll` at the root so files and folders starting with `_` are served as-is.
-- `CNAME` at the root containing the custom domain on a single line, no protocol,
-  no trailing slash. Use `toatech.com` as a placeholder and call it out clearly in
-  your summary so it can be corrected before DNS is configured.
+- `CNAME` at the root containing exactly `toatechllc.com` on a single line — no
+  protocol, no trailing slash, no `www`. This domain is confirmed; do not substitute
+  a placeholder.
 - `sitemap.xml` and `robots.txt` reference the custom domain, not the
   `*.github.io` URL.
 - Do **not** add a GitHub Actions workflow — plain Pages serving from the branch is
   enough and has nothing to break.
 
-DNS (for reference, not something to automate): apex `A` records to GitHub Pages IPs,
-or `CNAME` on `www` to `<user>.github.io`, then enable "Enforce HTTPS" in repo settings.
+DNS is managed at **Cloudflare** (registrar and nameservers). For reference — not
+something to automate:
+
+- Apex `toatechllc.com`: four `A` records to the GitHub Pages IPs (`185.199.108.153`,
+  `.109.153`, `.110.153`, `.111.153`), or a `CNAME` using Cloudflare's CNAME flattening.
+- `www`: `CNAME` to `<github-user>.github.io`.
+- Set those records to **DNS only (grey cloud)** while GitHub provisions its
+  certificate — proxying (orange cloud) blocks the Let's Encrypt validation and is the
+  usual cause of a stuck "certificate pending" state. Proxying can be re-enabled after
+  the certificate issues, with Cloudflare SSL/TLS mode set to **Full (strict)**.
+- Then tick "Enforce HTTPS" in the repo's Pages settings.
+
+Subdomains are expected later for other services, so keep the apex records and any
+future subdomain records independent — don't wildcard.
 
 ---
 
@@ -304,8 +316,8 @@ or `CNAME` on `www` to `<user>.github.io`, then enable "Enforce HTTPS" in repo s
 
 ## First Task
 
-1. Confirm the custom domain and correct it in `CNAME`, `sitemap.xml`, and the
-   canonical/OG tags if it isn't `toatech.com`.
+1. Use `toatechllc.com` as the canonical domain everywhere it appears: `CNAME`,
+   `sitemap.xml`, `robots.txt`, and the canonical / Open Graph URLs.
 2. Scaffold the file structure in §3.
 3. Build the complete single page per §4–§7.
 4. Open `index.html` and verify at 320px, 768px, and 1440px widths.

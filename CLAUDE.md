@@ -25,7 +25,7 @@ Before calling work done, run the verification in README §6.6: a keyboard-only 
 - Use relative paths only, never a leading `/`, so the site works from `file://` and from a subpath.
 - Mobile-first, from 320px to 1440px+, with no horizontal scroll.
 - Do not add a GitHub Actions workflow. Pages serves the default branch root, and `.nojekyll` sits at the root.
-- `CNAME` holds a placeholder (`toatech.com`) until the owner confirms the domain. `sitemap.xml`, `robots.txt`, the canonical URL, and the OG tags must use the same domain.
+- The domain is `toatechllc.com` (confirmed by the owner). `CNAME`, `sitemap.xml`, `robots.txt`, the canonical URL, the OG/Twitter tags, and the JSON-LD must all use it. DNS is at Cloudflare, and README §8 has the records. Subdomains are planned for other services, so never add a wildcard record.
 
 ## Architecture
 
