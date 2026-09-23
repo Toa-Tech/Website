@@ -1,0 +1,79 @@
+/* ==========================================================================
+   Reset
+   Box-sizing, margin reset and sensible element defaults. No visual design
+   decisions here: those live in tokens.css and main.css.
+   ========================================================================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+ul,
+ol,
+li,
+figure,
+blockquote,
+dl,
+dd {
+  margin: 0;
+}
+
+ul,
+ol {
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+}
+
+img,
+svg,
+picture {
+  display: block;
+  max-width: 100%;
+}
+
+img {
+  height: auto;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+/* Long words and email addresses wrap instead of forcing horizontal scroll. */
+p,
+li,
+h1,
+h2,
+h3,
+a {
+  overflow-wrap: break-word;
+}
+
+/* Respect the hidden attribute even when a class sets display. */
+[hidden] {
+  display: none !important;
+}
