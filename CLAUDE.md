@@ -74,10 +74,10 @@ When a design choice conflicts with accessibility, accessibility wins. Rules tha
 - Write in plain language and expand acronyms on first use, including a one-clause explanation of what n8n is.
 - Ask before stating business facts, pricing, or claims.
 - Service scope, as the owner stated it. Cloud work supports the apps and automations Toa Tech builds. It covers recommending AWS resources, Azure data pipelines, and Terraform. Do not offer cost cutting, cost or pricing reviews, or audits of existing cloud environments, and do not mention pricing anywhere.
-- The site speaks in the first person ("I").
+- The site uses "we" for Toa Tech. The owner works alone for now but may hire, so do not switch to "I".
 
 ## Working agreement
 
 - If anything in the brief is ambiguous, show a plan before writing files.
-- Commit in logical chunks. Do not push unless asked. The directory is not yet a git repo, so run `git init` before the first commit.
+- Commit in logical chunks on `main`. Do not push unless asked.
 - After each meaningful chunk, state in a line or two what changed and what is next.
