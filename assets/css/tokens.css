@@ -74,7 +74,7 @@
   --tracking-eyebrow: 0.08em;
 
   --measure: 65ch;        /* paragraph line length */
-  --measure-narrow: 45ch; /* hero heading */
+  --measure-heading: 30ch; /* hero heading line length */
 
   /* ------------------------------------------------------------------------
      Spacing (rem so it scales with the user's font size)
@@ -111,6 +111,7 @@
   --radius-md: 0.5rem;
   --radius-lg: 0.75rem;
   --border-width: 1px;            /* hairline */
+  --border-width-thick: 2px;      /* outlined buttons */
   --shadow-soft: 0 1px 2px rgb(22 28 39 / 0.04), 0 4px 16px rgb(22 28 39 / 0.05);
 
   /* ------------------------------------------------------------------------
@@ -118,7 +119,8 @@
      ------------------------------------------------------------------------ */
   --focus-width: 3px;             /* >= 2px required */
   --focus-offset: 2px;
-  --target-min: 2.75rem;          /* 44px minimum for key controls */
+  --target-min: 2.75rem;          /* 44px: menu button, CTAs, mobile nav */
+  --target-sm: 1.5rem;            /* 24px: WCAG 2.2 minimum for any target */
   --icon-size: 2rem;
   --icon-stroke: 1.75;
 

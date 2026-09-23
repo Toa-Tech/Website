@@ -1,0 +1,605 @@
+/* ==========================================================================
+   Main styles: layout and components
+   Mobile-first. Uses tokens from tokens.css only (no raw colors or sizes).
+   Breakpoints (see tokens.css): 48em = --bp-md, 64em = --bp-lg.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Base
+   -------------------------------------------------------------------------- */
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  line-height: var(--leading-body);
+}
+
+@media (min-width: 64em) {
+  body {
+    font-size: var(--text-md);
+  }
+}
+
+/* Links in running text: colored and underlined (never color alone). */
+a {
+  color: var(--color-accent);
+  text-decoration: underline;
+  text-decoration-thickness: from-font;
+  text-underline-offset: 0.2em;
+}
+
+a:hover {
+  color: var(--color-accent-strong);
+}
+
+/* One focus style for every interactive element. */
+:focus-visible {
+  outline: var(--focus-width) solid var(--color-focus);
+  outline-offset: var(--focus-offset);
+}
+
+/* Keep in-page anchor targets clear of the sticky header. */
+[id] {
+  scroll-margin-top: var(--space-sm);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Utilities
+   -------------------------------------------------------------------------- */
+.visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0 0 0 0) !important;
+  clip-path: inset(50%) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+@media (min-width: 48em) {
+  .container {
+    max-width: calc(var(--container-max) + 2 * var(--gutter-wide));
+    padding-inline: var(--gutter-wide);
+  }
+}
+
+/* An email address shown as plain, easy-to-select text. */
+.email-text {
+  font-weight: var(--weight-semibold);
+  color: var(--color-text);
+}
+
+/* --------------------------------------------------------------------------
+   Skip link: first focusable element, hidden until focused.
+   -------------------------------------------------------------------------- */
+.skip-link {
+  position: absolute;
+  top: var(--space-2xs);
+  left: var(--space-2xs);
+  z-index: 100;
+  padding: var(--space-xs) var(--space-sm);
+  background-color: var(--color-surface);
+  color: var(--color-accent);
+  font-weight: var(--weight-semibold);
+  border-radius: var(--radius-sm);
+  transform: translateY(-200%);
+}
+
+.skip-link:focus {
+  transform: none;
+}
+
+/* --------------------------------------------------------------------------
+   Buttons
+   -------------------------------------------------------------------------- */
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--target-min);
+  padding: var(--space-2xs) var(--space-md);
+  border: var(--border-width-thick) solid transparent;
+  border-radius: var(--radius-md);
+  font-weight: var(--weight-semibold);
+  line-height: var(--leading-snug);
+  text-align: center;
+  text-decoration: none;
+  transition: background-color var(--duration-fast) var(--ease-standard),
+    border-color var(--duration-fast) var(--ease-standard),
+    color var(--duration-fast) var(--ease-standard);
+}
+
+.button--primary {
+  background-color: var(--color-accent);
+  border-color: var(--color-accent);
+  color: var(--color-on-accent);
+}
+
+.button--primary:hover {
+  background-color: var(--color-accent-strong);
+  border-color: var(--color-accent-strong);
+  color: var(--color-on-accent);
+}
+
+.button--secondary {
+  background-color: transparent;
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+.button--secondary:hover {
+  background-color: var(--color-surface);
+  border-color: var(--color-accent-strong);
+  color: var(--color-accent-strong);
+}
+
+.button--large {
+  padding: var(--space-xs) var(--space-lg);
+  font-size: var(--text-md);
+}
+
+/* ==========================================================================
+   SITE HEADER
+   ========================================================================== */
+.site-header {
+  background-color: var(--color-surface);
+  border-bottom: var(--border-width) solid var(--color-border);
+}
+
+.site-header__inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2xs) var(--space-sm);
+  min-height: var(--header-height);
+  padding-block: var(--space-2xs);
+}
+
+.site-header__brand {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--target-min);
+  color: var(--color-text);
+  font-size: var(--text-lg);
+  font-weight: var(--weight-bold);
+  text-decoration: none;
+}
+
+.site-header__brand:hover {
+  color: var(--color-accent-strong);
+}
+
+/* Menu button (shown by main.js on small screens only). */
+.site-header__toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2xs);
+  min-width: var(--target-min);
+  min-height: var(--target-min);
+  padding: var(--space-2xs) var(--space-sm);
+  background-color: var(--color-surface);
+  border: var(--border-width-thick) solid var(--color-border-strong);
+  border-radius: var(--radius-md);
+  color: var(--color-text);
+  font-weight: var(--weight-semibold);
+}
+
+.site-header__toggle:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+.site-header__toggle-icon {
+  width: var(--space-md);
+  height: var(--space-md);
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+
+/* The menu takes a full row on small screens. */
+.site-header__menu {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 100%;
+  gap: var(--space-sm);
+  padding-block: var(--space-2xs) var(--space-sm);
+}
+
+/* Once main.js has wired up the toggle, the small-screen menu starts
+   collapsed. Without JS the menu simply stays visible. */
+.site-header--enhanced .site-header__menu:not(.is-open) {
+  display: none;
+}
+
+.site-nav__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3xs) var(--space-sm);
+  list-style: none;
+}
+
+/* With JS, the open small-screen menu stacks full-width links. */
+.site-header--enhanced .site-nav__list {
+  flex-direction: column;
+}
+
+.site-nav__link {
+  display: flex;
+  align-items: center;
+  min-height: var(--target-min);
+  padding-inline: var(--space-3xs);
+  color: var(--color-text);
+  font-weight: var(--weight-semibold);
+  text-decoration: none;
+}
+
+.site-nav__link:hover {
+  color: var(--color-accent);
+  text-decoration: underline;
+  text-underline-offset: 0.3em;
+}
+
+.site-header__cta {
+  align-self: flex-start;
+}
+
+@media (min-width: 48em) {
+  .site-header__inner {
+    flex-wrap: nowrap;
+  }
+
+  .site-header__toggle {
+    display: none;
+  }
+
+  .site-header__menu,
+  .site-header--enhanced .site-header__menu:not(.is-open) {
+    display: flex;
+    flex-direction: row;
+    flex-basis: auto;
+    align-items: center;
+    gap: var(--space-md);
+    padding-block: 0;
+  }
+
+  .site-nav__list,
+  .site-header--enhanced .site-nav__list {
+    flex-direction: row;
+    gap: var(--space-md);
+  }
+
+  .site-nav__link {
+    min-height: var(--target-sm);
+  }
+
+  .site-header__cta {
+    align-self: auto;
+  }
+}
+
+/* Sticky only when there is room for it, so at high zoom or on short
+   screens the header never hides content or the focused element. */
+@media (min-width: 48em) and (min-height: 30em) {
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+
+  [id] {
+    scroll-margin-top: calc(var(--header-height) + var(--space-sm));
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Shared section patterns
+   -------------------------------------------------------------------------- */
+.section {
+  padding-block: var(--section-pad);
+}
+
+.section--alt {
+  background-color: var(--color-surface-alt);
+}
+
+@media (min-width: 48em) {
+  .section {
+    padding-block: var(--section-pad-wide);
+  }
+}
+
+.eyebrow {
+  margin-bottom: var(--space-xs);
+  color: var(--color-accent);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-bold);
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+}
+
+.section__title {
+  max-width: var(--measure);
+  font-size: var(--text-xl);
+  line-height: var(--leading-tight);
+}
+
+@media (min-width: 48em) {
+  .section__title {
+    font-size: var(--text-2xl);
+  }
+}
+
+.section__intro {
+  max-width: var(--measure);
+  margin-top: var(--space-sm);
+  color: var(--color-text-muted);
+}
+
+.prose {
+  max-width: var(--measure);
+  margin-top: var(--space-md);
+}
+
+.prose > * + * {
+  margin-top: var(--space-sm);
+}
+
+/* --------------------------------------------------------------------------
+   Hero
+   -------------------------------------------------------------------------- */
+.hero {
+  padding-block: var(--space-2xl) var(--section-pad);
+}
+
+@media (min-width: 48em) {
+  .hero {
+    padding-block: var(--space-3xl);
+  }
+}
+
+.hero__title {
+  max-width: var(--measure-heading);
+  font-size: var(--text-2xl);
+  line-height: var(--leading-tight);
+}
+
+@media (min-width: 64em) {
+  .hero__title {
+    font-size: var(--text-3xl);
+  }
+}
+
+.hero__lead {
+  max-width: var(--measure);
+  margin-top: var(--space-md);
+  color: var(--color-text-muted);
+  font-size: var(--text-md);
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  margin-top: var(--space-lg);
+}
+
+.hero__note {
+  max-width: var(--measure);
+  margin-top: var(--space-sm);
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+}
+
+/* --------------------------------------------------------------------------
+   Service cards
+   -------------------------------------------------------------------------- */
+.card-grid {
+  display: grid;
+  gap: var(--space-md);
+  margin-top: var(--space-xl);
+  list-style: none;
+}
+
+@media (min-width: 64em) {
+  .card-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-lg) var(--space-md);
+  background-color: var(--color-surface);
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-soft);
+}
+
+.card__icon {
+  width: var(--icon-size);
+  height: var(--icon-size);
+  fill: none;
+  stroke: var(--color-accent);
+  stroke-width: var(--icon-stroke);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.card__title {
+  margin-top: var(--space-sm);
+  font-size: var(--text-lg);
+  line-height: var(--leading-snug);
+}
+
+.card__text {
+  margin-top: var(--space-xs);
+  color: var(--color-text-muted);
+}
+
+.card__list {
+  display: grid;
+  gap: var(--space-2xs);
+  margin-top: var(--space-md);
+  padding-top: var(--space-md);
+  padding-left: var(--space-md);
+  border-top: var(--border-width) solid var(--color-border);
+}
+
+.card__list li::marker {
+  color: var(--color-accent);
+}
+
+/* --------------------------------------------------------------------------
+   Approach steps
+   -------------------------------------------------------------------------- */
+.steps {
+  display: grid;
+  gap: var(--space-lg);
+  margin-top: var(--space-xl);
+  list-style: none;
+  counter-reset: step;
+}
+
+@media (min-width: 48em) {
+  .steps {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-xl) var(--space-lg);
+  }
+}
+
+.steps__item {
+  padding-top: var(--space-md);
+  border-top: var(--border-width-thick) solid var(--color-accent);
+  counter-increment: step;
+}
+
+/* Visual step number; the ordered list already conveys order to assistive tech. */
+.steps__item::before {
+  content: counter(step, decimal-leading-zero);
+  content: counter(step, decimal-leading-zero) / "";
+  display: block;
+  margin-bottom: var(--space-2xs);
+  color: var(--color-accent);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-bold);
+  letter-spacing: var(--tracking-eyebrow);
+}
+
+.steps__title {
+  font-size: var(--text-lg);
+  line-height: var(--leading-snug);
+}
+
+.steps__text {
+  max-width: var(--measure);
+  margin-top: var(--space-2xs);
+  color: var(--color-text-muted);
+}
+
+/* --------------------------------------------------------------------------
+   Contact
+   -------------------------------------------------------------------------- */
+.contact__text {
+  max-width: var(--measure);
+  margin-top: var(--space-sm);
+  color: var(--color-text-muted);
+  font-size: var(--text-md);
+}
+
+.contact__button {
+  margin-top: var(--space-lg);
+}
+
+.contact__note {
+  max-width: var(--measure);
+  margin-top: var(--space-md);
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+}
+
+.contact__address {
+  margin-top: var(--space-3xs);
+  font-size: var(--text-lg);
+}
+
+/* ==========================================================================
+   SITE FOOTER
+   ========================================================================== */
+.site-footer {
+  padding-block: var(--space-xl);
+  background-color: var(--color-surface);
+  border-top: var(--border-width) solid var(--color-border);
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+}
+
+.site-footer__inner {
+  display: grid;
+  gap: var(--space-lg);
+}
+
+@media (min-width: 48em) {
+  .site-footer__inner {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+  }
+
+  .site-footer__legal {
+    grid-column: 1 / -1;
+  }
+}
+
+.site-footer__wordmark {
+  color: var(--color-text);
+  font-size: var(--text-md);
+  font-weight: var(--weight-bold);
+}
+
+.site-footer__heading {
+  margin-bottom: var(--space-2xs);
+  color: var(--color-text);
+  font-size: var(--text-base);
+}
+
+.site-footer__text {
+  max-width: var(--measure);
+}
+
+.site-footer__legal {
+  padding-top: var(--space-md);
+  border-top: var(--border-width) solid var(--color-border);
+}
+
+/* --------------------------------------------------------------------------
+   Reduced motion: switch off every transition and animation.
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+  }
+}
