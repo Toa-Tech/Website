@@ -1,0 +1,6 @@
+# Local working docs: kept on disk, never published to GitHub Pages
+CLAUDE.md
+README.md
+
+# Local tool config
+.claude/
