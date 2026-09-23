@@ -90,6 +90,7 @@ a:hover {
    Skip link: first focusable element, hidden until focused.
    -------------------------------------------------------------------------- */
 .skip-link {
+  --color-focus: var(--color-focus-inverse); /* it appears over the dark header */
   position: absolute;
   top: var(--space-2xs);
   left: var(--space-2xs);
@@ -150,6 +151,25 @@ a:hover {
   color: var(--color-accent-strong);
 }
 
+/* Silver button for dark surfaces (navy would be 1.47:1 on ink). */
+.button--inverse {
+  background-color: var(--color-silver);
+  border-color: var(--color-silver);
+  color: var(--color-ink);
+}
+
+.button--inverse:hover {
+  background-color: var(--color-silver-bright);
+  border-color: var(--color-silver-bright);
+  color: var(--color-ink);
+}
+
+/* Hover adds an underline so the change never relies on color alone. */
+.button:hover {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
 .button--large {
   padding: var(--space-xs) var(--space-lg);
   font-size: var(--text-md);
@@ -158,9 +178,12 @@ a:hover {
 /* ==========================================================================
    SITE HEADER
    ========================================================================== */
+/* Dark band matching the logo. Redefining --color-focus here switches every
+   focus ring inside the header to the silver that shows on ink. */
 .site-header {
-  background-color: var(--color-surface);
-  border-bottom: var(--border-width) solid var(--color-border);
+  --color-focus: var(--color-focus-inverse);
+  background-color: var(--color-ink);
+  color: var(--color-silver);
 }
 
 .site-header__inner {
@@ -175,16 +198,40 @@ a:hover {
 
 .site-header__brand {
   display: inline-flex;
+  flex: 1 1 0%; /* zero basis: shares the row with the menu button, then wraps its text */
+  min-width: 0;
   align-items: center;
+  gap: var(--space-xs);
   min-height: var(--target-min);
-  color: var(--color-text);
-  font-size: var(--text-lg);
+  color: var(--color-silver-bright);
+  font-size: var(--text-md);
   font-weight: var(--weight-bold);
+  letter-spacing: var(--tracking-wordmark);
   text-decoration: none;
+  text-transform: uppercase;
 }
 
 .site-header__brand:hover {
-  color: var(--color-accent-strong);
+  color: var(--color-silver-bright);
+  text-decoration: underline;
+  text-underline-offset: 0.3em;
+}
+
+.site-header__mark {
+  width: auto;
+  height: var(--logo-mark-size);
+}
+
+/* On very narrow screens (or high zoom) the wordmark wraps onto two lines
+   rather than pushing the menu button onto its own row. */
+.site-header__wordmark {
+  min-width: 0;
+  line-height: var(--leading-tight);
+}
+
+.site-header__mark,
+.site-header__toggle {
+  flex-shrink: 0;
 }
 
 /* Menu button (shown by main.js on small screens only). */
@@ -195,16 +242,16 @@ a:hover {
   min-width: var(--target-min);
   min-height: var(--target-min);
   padding: var(--space-2xs) var(--space-sm);
-  background-color: var(--color-surface);
-  border: var(--border-width-thick) solid var(--color-border-strong);
+  background-color: transparent;
+  border: var(--border-width-thick) solid var(--color-silver-muted);
   border-radius: var(--radius-md);
-  color: var(--color-text);
+  color: var(--color-silver);
   font-weight: var(--weight-semibold);
 }
 
 .site-header__toggle:hover {
-  border-color: var(--color-accent);
-  color: var(--color-accent);
+  border-color: var(--color-silver-bright);
+  color: var(--color-silver-bright);
 }
 
 .site-header__toggle-icon {
@@ -248,13 +295,13 @@ a:hover {
   align-items: center;
   min-height: var(--target-min);
   padding-inline: var(--space-3xs);
-  color: var(--color-text);
+  color: var(--color-silver);
   font-weight: var(--weight-semibold);
   text-decoration: none;
 }
 
 .site-nav__link:hover {
-  color: var(--color-accent);
+  color: var(--color-silver-bright);
   text-decoration: underline;
   text-underline-offset: 0.3em;
 }
@@ -263,7 +310,7 @@ a:hover {
   align-self: flex-start;
 }
 
-@media (min-width: 48em) {
+@media (min-width: 64em) { /* --bp-lg: full nav fits beside the wordmark */
   .site-header__inner {
     flex-wrap: nowrap;
   }
@@ -299,7 +346,7 @@ a:hover {
 
 /* Sticky only when there is room for it, so at high zoom or on short
    screens the header never hides content or the focused element. */
-@media (min-width: 48em) and (min-height: 30em) {
+@media (min-width: 64em) and (min-height: 30em) {
   .site-header {
     position: sticky;
     top: 0;
@@ -374,6 +421,46 @@ a:hover {
 @media (min-width: 48em) {
   .hero {
     padding-block: var(--space-3xl);
+  }
+}
+
+/* The logo image comes first in the DOM but is decorative (alt=""), so
+   placing it in the right-hand column changes no reading order. */
+.hero__logo {
+  display: none;
+}
+
+@media (min-width: 48em) {
+  .hero__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: var(--space-lg);
+  }
+
+  .hero__logo {
+    display: block;
+    grid-column: 2;
+    grid-row: 1;
+    width: var(--logo-full-width-md);
+    /* The logo file has a white background; multiply lets the page
+       background show through it. */
+    mix-blend-mode: multiply;
+  }
+
+  .hero__content {
+    grid-column: 1;
+    grid-row: 1;
+  }
+}
+
+@media (min-width: 64em) {
+  .hero__inner {
+    gap: var(--space-xl);
+  }
+
+  .hero__logo {
+    width: var(--logo-full-width);
   }
 }
 
@@ -546,11 +633,12 @@ a:hover {
 /* ==========================================================================
    SITE FOOTER
    ========================================================================== */
+/* Dark band matching the header; focus rings switch to silver. */
 .site-footer {
+  --color-focus: var(--color-focus-inverse);
   padding-block: var(--space-xl);
-  background-color: var(--color-surface);
-  border-top: var(--border-width) solid var(--color-border);
-  color: var(--color-text-muted);
+  background-color: var(--color-ink);
+  color: var(--color-silver-muted);
   font-size: var(--text-sm);
 }
 
@@ -570,14 +658,33 @@ a:hover {
 }
 
 .site-footer__wordmark {
-  color: var(--color-text);
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  margin-bottom: var(--space-xs);
+  color: var(--color-silver-bright);
   font-size: var(--text-md);
   font-weight: var(--weight-bold);
+  letter-spacing: var(--tracking-wordmark);
+  text-transform: uppercase;
+}
+
+.site-footer__mark {
+  width: auto;
+  height: var(--logo-mark-size);
+}
+
+.site-footer__link {
+  color: var(--color-silver);
+}
+
+.site-footer__link:hover {
+  color: var(--color-silver-bright);
 }
 
 .site-footer__heading {
   margin-bottom: var(--space-2xs);
-  color: var(--color-text);
+  color: var(--color-silver-bright);
   font-size: var(--text-base);
 }
 
@@ -587,7 +694,7 @@ a:hover {
 
 .site-footer__legal {
   padding-top: var(--space-md);
-  border-top: var(--border-width) solid var(--color-border);
+  border-top: var(--border-width) solid var(--color-border-inverse);
 }
 
 /* --------------------------------------------------------------------------

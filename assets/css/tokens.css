@@ -7,46 +7,69 @@
 :root {
   /* ------------------------------------------------------------------------
      Color
+     Derived from the Toa Tech logo (assets/img/logo-full.jpg): logo navy,
+     near-black ink, and neutral chrome silver. Where a logo color failed
+     contrast it was adjusted, never the other way round.
+
      Contrast ratios below are computed (WCAG 2.x relative luminance), not
      estimated. Re-run the calculation and update these comments whenever a
      color changes.
 
-     Text (needs >= 4.5:1 for body text, >= 3:1 for large text)
-       --color-text        on --color-bg          16.07:1
-       --color-text        on --color-surface     17.08:1
-       --color-text        on --color-surface-alt 15.08:1
-       --color-text-muted  on --color-bg           7.65:1
-       --color-text-muted  on --color-surface      8.12:1
-       --color-text-muted  on --color-surface-alt  7.17:1
-       --color-accent      on --color-bg           6.31:1
-       --color-accent      on --color-surface      6.70:1
-       --color-accent      on --color-surface-alt  5.92:1
-       --color-accent-strong on --color-bg         8.48:1
-       --color-accent-strong on --color-surface    9.01:1
-       --color-accent-strong on --color-surface-alt 7.95:1
-       --color-on-accent   on --color-accent       6.70:1
-       --color-on-accent   on --color-accent-strong 9.01:1
+     Light surfaces: text (needs >= 4.5:1; large text >= 3:1)
+       --color-text          on --color-bg           16.76:1
+       --color-text          on --color-surface      18.29:1
+       --color-text          on --color-surface-alt  15.29:1
+       --color-text-muted    on --color-bg            7.58:1
+       --color-text-muted    on --color-surface       8.26:1
+       --color-text-muted    on --color-surface-alt   6.91:1
+       --color-accent        on --color-bg           11.73:1
+       --color-accent        on --color-surface      12.79:1
+       --color-accent        on --color-surface-alt  10.70:1
+       --color-accent-strong on --color-bg           14.99:1
+       --color-accent-strong on --color-surface      16.35:1
+       --color-accent-strong on --color-surface-alt  13.68:1
+       --color-on-accent     on --color-accent       12.79:1
+       --color-on-accent     on --color-accent-strong 16.35:1
+
+     Dark surfaces (header, footer): text
+       --color-silver        on --color-ink          11.63:1
+       --color-silver-bright on --color-ink          16.44:1
+       --color-silver-muted  on --color-ink           8.02:1
+       --color-ink           on --color-silver       11.63:1  (button on dark)
+       --color-ink           on --color-silver-bright 16.44:1
 
      Non-text UI (needs >= 3:1)
-       --color-focus         on --color-bg          6.31:1
-       --color-focus         on --color-surface     6.70:1
-       --color-focus         on --color-surface-alt 5.92:1
-       --color-border-strong on --color-bg          3.80:1  (control edges)
-       --color-border-strong on --color-surface     4.04:1
-       --color-border        on --color-surface     1.40:1  (decorative
+       --color-focus         on --color-bg           11.73:1
+       --color-focus         on --color-surface      12.79:1
+       --color-focus         on --color-surface-alt  10.70:1
+       --color-focus-inverse on --color-ink          11.63:1
+       --color-border-strong on --color-bg            3.87:1  (control edges)
+       --color-border-strong on --color-surface       4.22:1
+       --color-silver-muted  on --color-ink           8.02:1  (control edges on dark)
+       --color-border        on --color-surface       1.43:1  (decorative
          hairlines only: never the sole boundary of an interactive control)
+
+     Do not use: --color-accent on --color-ink is 1.47:1. Navy is for light
+     surfaces only; dark surfaces use the silver tokens and focus-inverse.
      ------------------------------------------------------------------------ */
-  --color-bg: #f7f8fa;            /* page background, near-white */
-  --color-surface: #ffffff;       /* cards */
-  --color-surface-alt: #eef1f5;   /* alternating section band */
-  --color-text: #161c27;
-  --color-text-muted: #48505e;
-  --color-accent: #1a4fd6;        /* links, primary button, eyebrows, icons */
-  --color-accent-strong: #153fab; /* hover / active state of accent */
-  --color-on-accent: #ffffff;     /* text on accent fills */
-  --color-border: #d5dae2;
-  --color-border-strong: #767f8e;
-  --color-focus: #1a4fd6;
+  --color-bg: #f4f5f7;              /* page background, cool near-white */
+  --color-surface: #ffffff;         /* cards */
+  --color-surface-alt: #e8ebef;     /* alternating section band, pale silver */
+  --color-text: #0f1520;
+  --color-text-muted: #474f5c;
+  --color-accent: #1d3350;          /* logo navy: links, buttons, eyebrows, icons */
+  --color-accent-strong: #0f2038;   /* hover / active state of accent */
+  --color-on-accent: #ffffff;       /* text on accent fills */
+  --color-border: #d3d8df;
+  --color-border-strong: #737c8a;
+  --color-focus: #1d3350;
+
+  --color-ink: #0c121c;             /* logo black-navy: header and footer */
+  --color-silver: #c7ccd4;          /* logo chrome: text and buttons on ink */
+  --color-silver-bright: #eef0f3;   /* headings and hover on ink */
+  --color-silver-muted: #a3aab5;    /* secondary text and borders on ink */
+  --color-focus-inverse: #c7ccd4;   /* focus ring on ink */
+  --color-border-inverse: #2b3545;  /* decorative hairline on ink */
 
   /* ------------------------------------------------------------------------
      Typography
@@ -72,6 +95,7 @@
   --weight-bold: 700;
 
   --tracking-eyebrow: 0.08em;
+  --tracking-wordmark: 0.06em;
 
   --measure: 65ch;        /* paragraph line length */
   --measure-heading: 30ch; /* hero heading line length */
@@ -122,6 +146,9 @@
   --target-min: 2.75rem;          /* 44px: menu button, CTAs, mobile nav */
   --target-sm: 1.5rem;            /* 24px: WCAG 2.2 minimum for any target */
   --icon-size: 2rem;
+  --logo-mark-size: 2.75rem;       /* header circle mark height */
+  --logo-full-width-md: 14rem;     /* hero logo, tablet */
+  --logo-full-width: 20rem;        /* hero logo, desktop */
   --icon-stroke: 1.75;
 
   --duration-fast: 150ms;

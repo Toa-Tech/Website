@@ -45,8 +45,8 @@
       }
     });
 
-    // Reset when the layout switches to the desktop header (48em = --bp-md).
-    var desktop = window.matchMedia("(min-width: 48em)");
+    // Reset when the layout switches to the desktop header (64em = --bp-lg).
+    var desktop = window.matchMedia("(min-width: 64em)");
     desktop.addEventListener("change", function (event) {
       if (event.matches) {
         setOpen(false);

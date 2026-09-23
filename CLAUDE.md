@@ -41,7 +41,9 @@ CNAME, robots.txt, sitemap.xml, .nojekyll   # deployment files at the root
 
 Page sections, in order: header → hero → services (three equal cards) → approach → about → contact → footer. The footer also holds a short accessibility statement (README §6.7). The `<head>` needs a title, meta description, canonical URL, Open Graph and Twitter tags, a favicon, and JSON-LD `ProfessionalService` data with the business name and email. Keep total page weight under 500KB.
 
-The design is clean, light B2B: a near-white background, one blue accent used sparingly, a content width of about 1100px, a paragraph measure of about 65ch, hairline borders and soft shadows, and no gradients or glow (README §4).
+The design is clean, light B2B (README §4): a content width of about 1100px, a paragraph measure of about 65ch, hairline borders and soft shadows, and no gradients or glow. The owner's logo overrides README §4 on color. The palette comes from the logo: navy (`--color-accent`) on light sections, near-black ink (`--color-ink`) for the header and footer, and chrome silver for text and buttons on ink. Accessibility still overrides the brand: navy on ink is 1.47:1, so dark areas redefine `--color-focus` to the silver `--color-focus-inverse` and use `.button--inverse`.
+
+Logo assets live in `assets/img/`. `logo-full.jpg` (circle plus wordmark) is the preferred form. The owner wants the circle mark alone (`logo-mark.png`, favicons) used only where space requires it. The full logo has a white background and relies on `mix-blend-mode: multiply`, so place it only on light surfaces. The mark is an ellipse about 6% wider than tall because the source art is. Keep that proportion.
 
 - `main.css` has no hard-coded hex values or magic pixel numbers. It references tokens only.
 - `tokens.css` records the measured contrast ratio of each foreground/background pair in a comment. Update those comments whenever a color changes.

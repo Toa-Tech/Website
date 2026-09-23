@@ -6,7 +6,7 @@
   <title>Toa Tech LLC | Full-Stack Development, Cloud Computing and n8n Automation</title>
   <meta name="description" content="Toa Tech LLC is an independent consultancy that builds web applications, sets up cloud infrastructure, and automates business workflows with n8n.">
   <link rel="canonical" href="https://toatech.com/">
-  <meta name="theme-color" content="#f7f8fa">
+  <meta name="theme-color" content="#0c121c">
 
   <!-- Open Graph / social sharing (absolute URLs are required by these tags) -->
   <meta property="og:type" content="website">
@@ -17,15 +17,15 @@
   <meta property="og:image" content="https://toatech.com/assets/img/og-image.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="Toa Tech LLC: Full-Stack Development, Cloud Computing, n8n Automation">
+  <meta property="og:image:alt" content="Toa Tech logo, a circle split between circuit-board traces and Polynesian patterns, beside the words Toa Tech LLC: Full-Stack Development, Cloud Computing, n8n Automation">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Toa Tech LLC | Full-Stack Development, Cloud Computing and n8n Automation">
   <meta name="twitter:description" content="An independent consultancy that builds web applications, sets up cloud infrastructure, and automates business workflows with n8n.">
   <meta name="twitter:image" content="https://toatech.com/assets/img/og-image.png">
-  <meta name="twitter:image:alt" content="Toa Tech LLC: Full-Stack Development, Cloud Computing, n8n Automation">
+  <meta name="twitter:image:alt" content="Toa Tech logo, a circle split between circuit-board traces and Polynesian patterns, beside the words Toa Tech LLC: Full-Stack Development, Cloud Computing, n8n Automation">
 
-  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
   <link rel="icon" href="assets/img/favicon-32.png" type="image/png" sizes="32x32">
+  <link rel="icon" href="assets/img/favicon-192.png" type="image/png" sizes="192x192">
   <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
 
   <link rel="stylesheet" href="assets/css/tokens.css">
@@ -59,7 +59,11 @@
        ================================================================== -->
   <header class="site-header">
     <div class="site-header__inner container">
-      <a class="site-header__brand" href="index.html">Toa Tech LLC</a>
+      <!-- The mark is decorative (alt=""): the link's text already names it. -->
+      <a class="site-header__brand" href="index.html">
+        <img class="site-header__mark" src="assets/img/logo-mark.png" width="140" height="132" alt="">
+        <span class="site-header__wordmark">Toa Tech LLC</span>
+      </a>
 
       <!-- Hidden until main.js runs, so without JS the menu is simply always shown. -->
       <button class="site-header__toggle" type="button" aria-expanded="false" aria-controls="site-menu" hidden>
@@ -78,7 +82,7 @@
             <li class="site-nav__item"><a class="site-nav__link" href="#contact">Contact</a></li>
           </ul>
         </nav>
-        <a class="button button--primary site-header__cta" href="#contact">Get in touch</a>
+        <a class="button button--inverse site-header__cta" href="#contact">Get in touch</a>
       </div>
     </div>
   </header>
@@ -88,15 +92,20 @@
 
     <!-- ===== Hero ===== -->
     <section class="hero" aria-labelledby="hero-heading">
-      <div class="container">
-        <p class="eyebrow">Independent technology consultancy</p>
-        <h1 class="hero__title" id="hero-heading">Toa Tech LLC builds web applications, cloud infrastructure, and automated workflows for small and midsize businesses.</h1>
-        <p class="hero__lead">Whether you need a new product built, an existing system moved to the cloud, or hours of copy-and-paste work taken off your team’s plate, we scope it clearly, build it in visible steps, and hand it over with documentation your team can use.</p>
-        <div class="hero__actions">
-          <a class="button button--primary button--large" href="mailto:toatechllc@gmail.com">Email us about your project<span class="visually-hidden"> (opens your email app)</span></a>
-          <a class="button button--secondary button--large" href="#services">See our services</a>
+      <div class="hero__inner container">
+        <!-- Full logo. Decorative here (alt=""): the heading names the company.
+             Hidden on small screens so the email button stays in the first screen. -->
+        <img class="hero__logo" src="assets/img/logo-full.jpg" width="640" height="666" alt="" decoding="async">
+        <div class="hero__content">
+          <p class="eyebrow">Independent technology consultancy</p>
+          <h1 class="hero__title" id="hero-heading">Toa Tech LLC builds web applications, cloud infrastructure, and automated workflows for small and midsize businesses.</h1>
+          <p class="hero__lead">Whether you need a new product built, an existing system moved to the cloud, or hours of copy-and-paste work taken off your team’s plate, we scope it clearly, build it in visible steps, and hand it over with documentation your team can use.</p>
+          <div class="hero__actions">
+            <a class="button button--primary button--large" href="mailto:toatechllc@gmail.com">Email us about your project<span class="visually-hidden"> (opens your email app)</span></a>
+            <a class="button button--secondary button--large" href="#services">See our services</a>
+          </div>
+          <p class="hero__note">The email button opens your email app. You can also write to <span class="email-text">toatechllc@gmail.com</span>.</p>
         </div>
-        <p class="hero__note">The email button opens your email app. You can also write to <span class="email-text">toatechllc@gmail.com</span>.</p>
       </div>
     </section>
 
@@ -218,7 +227,10 @@
   <footer class="site-footer">
     <div class="site-footer__inner container">
       <div class="site-footer__brand">
-        <p class="site-footer__wordmark">Toa Tech LLC</p>
+        <p class="site-footer__wordmark">
+          <img class="site-footer__mark" src="assets/img/logo-mark.png" width="140" height="132" alt="" loading="lazy">
+          <span>Toa Tech LLC</span>
+        </p>
         <p><a class="site-footer__link" href="mailto:toatechllc@gmail.com">toatechllc@gmail.com</a></p>
       </div>
 
