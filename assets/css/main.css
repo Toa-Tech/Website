@@ -396,12 +396,6 @@ a:hover {
   }
 }
 
-.section__intro {
-  max-width: var(--measure);
-  margin-top: var(--space-sm);
-  color: var(--color-text-muted);
-}
-
 .prose {
   max-width: var(--measure);
   margin-top: var(--space-md);
@@ -502,6 +496,7 @@ a:hover {
    -------------------------------------------------------------------------- */
 .card-grid {
   display: grid;
+  grid-template-columns: minmax(0, 1fr); /* never wider than the page, even with long words */
   gap: var(--space-md);
   margin-top: var(--space-xl);
   list-style: none;
@@ -537,6 +532,21 @@ a:hover {
   margin-top: var(--space-sm);
   font-size: var(--text-lg);
   line-height: var(--leading-snug);
+}
+
+/* One-line question that opens each card. */
+.card__hook {
+  margin-top: var(--space-2xs);
+  color: var(--color-accent);
+  font-weight: var(--weight-semibold);
+  line-height: var(--leading-snug);
+}
+
+/* Monospace filename, sized so "…xlsx?" fits a 320px card on one line.
+   The paragraph's overflow-wrap still breaks it if zoom leaves no room. */
+.card__filename {
+  font-family: var(--font-mono);
+  font-size: 0.85em;
 }
 
 .card__text {
